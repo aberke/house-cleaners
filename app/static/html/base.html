@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <title>Significance Labs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TODO">
+    <meta name="author" content="Significance Labs">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <!-- stylesheets -->
+    <link href="/static/css/base.css" rel="stylesheet">
+
+
+    <!-- javascript -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
+    
+<!--      
+     <script src="/vendor/angular/angular.min.js"></script>
+     <script src="/vendor/angular/angular-route.min.js"></script>
+
+ -->
+    <script src="/static/js/app.js"></script>
+	<script src="/static/js/controllers.js"></script>
+    <script src="/static/js/services.js"></script>
+    <script src="/static/js/factories.js"></script>
+
+    <script src="/static/js/routes.js"></script>
+    
+    <!-- directives -->
+    <script src="/static/directives/error.js"></script>
+
+</head>
+<body ng-controller="MainCntl">
+
+    <!-- header -->
+<!--     <ng-include src="'/static/html/partials/header.html'"></ng-include>
+    
+    <error></error>
+ 
+ -->
+    <!-- main view -- decided by routes.js -->
+    <div id='view' ng-view></div>
+ 
+</body>
+</html>

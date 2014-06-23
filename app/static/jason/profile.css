@@ -1,0 +1,29 @@
+/*
+
+Styles for jason's profile
+		/static/jason/profile.html
+
+*/
+
+@media (min-width: 700px) {
+img#profile-pic {
+	width: 30%;
+	float: left;
+}
+
+#name {
+	width: 60%;
+	display: inline-block;
+	text-align: center;
+}
+#name p{
+	max-width: 600px;
+	margin: auto;
+}
+}
+@media (max-width: 700px) {
+	img#profile-pic {
+		width: 100%;
+		float: none;
+	}
+}

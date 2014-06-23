@@ -1,0 +1,19 @@
+/***************************************************
+	Significance Labs
+	Brooklyn, NYC
+
+ 	Author: Alexandra Berke (aberke)
+ 	Written: June 2014
+
+
+ 	base CSS styles 
+
+****************************************************/
+
+
+
+input.error {
+	border: 2px solid red;
+}
+
+
