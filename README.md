@@ -24,10 +24,13 @@ $ source venv/bin/activate
 * Install dependencies: ```$ pip install -r requirements.txt``` (may need to run with sudo)
 * Make sure you have mongodb installed ```$ brew install mongodb```
 * Make sure mongodb is started ```$ mongod```
-```
 
 * Run server ```python run.py``` and visit<http://127.0.0.1:3000>
 
+
+Analytics
+===
+Google analytics: https://www.google.com/analytics/web/?et&authuser=2#report/visitors-overview/a52152670w84607722p87675852/
 
 
 For Alex
