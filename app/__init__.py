@@ -25,11 +25,11 @@ app = Flask('app')
 app.config.from_object('config')
 Compress(app)
 
-from cleaner import cleaner as cleaner_blueprint
-app.register_blueprint(cleaner_blueprint, url_prefix='/cleaner')
+# from cleaner import cleaner as cleaner_blueprint
+# app.register_blueprint(cleaner_blueprint, url_prefix='/cleaner')
 
-from .db import get_db
-db = get_db()
+# from .db import get_db
+# db = get_db()
 
 
 #---------------------------------------------- Configuration #
