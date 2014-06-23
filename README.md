@@ -29,7 +29,7 @@ $ source venv/bin/activate
 
 
 Analytics
-===
+---
 Google analytics: https://www.google.com/analytics/web/?et&authuser=2#report/visitors-overview/a52152670w84607722p87675852/
 
 
@@ -74,12 +74,9 @@ db.py
 
 
 TODO
-===
-
-
-Cleanliness
 ---
-	- db.py -- better way of serving db and raising exception if can't init
+
+
 
 
 
