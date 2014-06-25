@@ -8,12 +8,306 @@
 
  	base CSS styles 
 
+
+	colors:
+		orange: #ef7625 
+		dark-blue: #29abe2 
+		light-blue: #a0e4f9 
+		purple: #1b1464
+
+
 ****************************************************/
 
 
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url(/static/fonts/Montserrat-Regular.ttf);
+}
+
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #a0e4f9;
+}
+
+h1,h2,h3,h4,h5,p,li,a, td, th, span {
+	font-family: Montserrat-Regular;
+	margin: 0;
+}
+textarea {
+	background-color: white;
+	border: none;
+	margin: 0;
+	padding: 1em;
+	font-size: 1em;
+	min-height: 100px;
+	box-sizing: border-box;
+	width: 100%;
+}
+/* - colors ------------- */
+.blue-1 { color: #a0e4f9; }
+.blue-2 { color: #54c0dd; }
+.blue-3 { color: #29abe2; }
+.orange { color: #ef7625; }
+.purple { color: #1b1464; }
+/* ------------- colors - */
+
+.text-field, .btn {
+	cursor: pointer;
+	box-sizing: border-box;
+	border-radius: 10px;
+	text-align: center;
+	font-size: 15px;
+	padding: 10px;
+	width: 300px;
+	border-width: 3px;
+	border-style: solid;
+}
+.text-field.short,
+.btn.short {
+	width: 250px;
+}
+.text-field {
+	background-color: transparent;
+	border-color: white;
+}
+::-webkit-input-placeholder { color: #29abe2; }
+:-moz-placeholder { color: #29abe2; }
+::-moz-placeholder { color: #29abe2; }
+:-ms-input-placeholder { color: #29abe2; }
+
+.btn {
+	color: #a0e4f9;
+	background-color: #29abe2;
+	border-color: #29abe2;
+}
+.btn:hover, .btn.hover {
+	background-color: #54c0dd;
+	border-color: #54c0dd;
+}
+.next {
+	text-align: right;
+}
+.next .btn {
+	width: 100px;
+	border-color: #a0e4f9;
+	text-align: center;
+}
+
+.panel {
+	max-width: 600px;
+}
+.panel .panel-title {
+	color: white;
+	background-color: #1b1464;
+	font-size: 1.5em;
+	padding: 0.5em;
+	text-align: center;
+}
+.panel .panel-body {
+	background-color: white;
+	padding: 1.5em;
+}
+textarea.panel-body {
+	color: #a0e4f9;
+	height: 200px;
+}
 
 input.error {
 	border: 2px solid red;
 }
+
+
+#schedule {
+	width: 100%;
+	margin-top: 10px;
+}
+
+#schedule th, td{
+	color: white;
+}
+#schedule th{
+	color: white;
+	text-align: left;
+	font-size: 0.8em;
+	width: 14%; /* 1/7th of the total width */
+}
+#schedule td{
+	border-left: 2px solid #a0e4f9;
+	border-top: 2px solid #a0e4f9;
+	cursor: pointer;
+	font-weight: bold;
+	background-color: #29abe2;
+	height: 60px;
+	font-size: 1.4em;
+	padding: 4px;
+}
+#schedule td:first-child {
+   border-left: 0;
+}
+#schedule td .small {
+	font-size: 0.5em;
+}
+#schedule td:hover, #schedule td.active{
+	background-color: #ef7625;
+}
+
+/*** services-provided section ***/
+#services-provided {
+	
+}
+
+
+/*** services-provided section ***/
+
+/*** personal section ***/
+#personal .pic-container, 
+#personal .info-container {
+	display: inline-block;
+	padding: 0 20px;
+}
+#personal .pic-container img {
+	display: block;
+	margin: auto;
+	border-radius: 50%; /*circular image*/
+}
+#personal .file-upload-btn {
+	position: relative;
+	cursor: pointer;
+	border: 3px solid #a0e4f9;
+	border-radius: 6px;
+	padding: 10px;
+	text-align: center;
+	max-width: 150px;
+	margin: 10px auto 0 auto;
+	overflow: hidden;
+}
+#personal .file-upload-btn {
+	color: #a0e4f9;
+}
+#personal .file-upload-btn input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+#personal .info-container {
+	width: 300px;
+	vertical-align: bottom;
+}
+#personal .name {
+	color: #1b1464;
+	font-size: 2.5em;
+}
+#personal .blurb {
+	color: white;
+}
+
+/* ------- new-view ---------- */
+#new-view section {
+	border-bottom: 3px solid white;
+	padding: 2.5em 0;
+}
+#new-view .panel {
+	margin: auto;
+}
+
+#new-view section#services-provided{
+	background-color: #ef7625;
+}
+.banner{
+	background-color: #ef7625;
+	color: white;
+	font-size: 4em;
+	padding: 0.1em;
+	text-align: center;
+}
+#new-view section#personal{
+	background-color: #29abe2;
+}
+#new-view #personal .container {
+	max-width: 600px;
+	margin: auto;
+}
+#new-view section#personal textarea {
+	margin: 10px 0;
+}
+#new-view section#create-username input,
+#new-view section#create-username .btn,
+#new-view section#create-password input,
+#new-view section#create-password .btn{
+	display: block;
+	margin: 20px auto;
+}
+#new-view section#work-areas {
+	background-color: #29abe2;
+}
+#new-view section#finished .btn {
+	margin: 70px auto;
+	display: block;
+}
+
+/* ------- new-view ---------- */
+
+/* ------- index-view ---------- */
+#index-view .banner{
+	margin: 1em 0 0 0;
+	font-size: 4em;
+	color: #a0e4f9;
+}
+#index-view section {
+	max-width: 600px;
+	margin: auto;
+	padding: 1em;
+}
+#index-view #welcome-copy {
+	font-size: 18px;
+	color: #1b1464;
+	margin: 2em auto;
+}
+@media (min-width: 500px) {
+	#index-view .btn.left {
+		float: left;
+	}
+	#index-view .btn.right {
+		float: right;
+	}
+}
+@media (max-width: 499px) {
+	#index-view .btn {
+		display: block;
+		margin: 10px auto;
+	}
+}
+/* ------- index-view ---------- */
+
+
+
+
+
+/* - style-guide ---------------- */
+#style-guide #colors{
+	background-color: white;
+	padding: 10px;
+}
+#style-guide #colors span{
+	padding: 5px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+
+
+
+
+/* ---------------- style-guide - */
+
+
 
 

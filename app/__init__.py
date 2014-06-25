@@ -25,19 +25,21 @@ app = Flask('app')
 app.config.from_object('config')
 Compress(app)
 
-# from cleaner import cleaner as cleaner_blueprint
-# app.register_blueprint(cleaner_blueprint, url_prefix='/cleaner')
-
-# from .db import get_db
-# db = get_db()
+from cleaner import cleaner as cleaner_blueprint
+app.register_blueprint(cleaner_blueprint, url_prefix='/cleaner')
 
 
 #---------------------------------------------- Configuration #
 
+@app.route('/style-guide')
+def style_guide():
+	return send_file('static/html/style-guide.html')
 
 @app.route('/')
+@app.route('/upload')
+@app.route('/new')
 @app.route('/login')
-@app.route('/new/cleaner')
+@app.route('/new/login')
 @app.route('/new/cleaner')
 @app.route('/<cleanerName>')
 def base(cleanerName=None):

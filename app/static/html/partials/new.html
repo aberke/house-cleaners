@@ -1,0 +1,143 @@
+<div id='new-view'>
+
+<section id='create-username'>
+
+    <input type='text' class='text-field' placeholder="What's your name?" >
+    <input type='text' class='text-field' placeholder="Your phone number?" >
+    <button class='btn'>NEXT</button>
+
+</section>
+<section id='create-password'>
+
+    <input type='text' class='text-field' placeholder="create a password" >
+    <input type='text' class='text-field' placeholder="confirm password" >
+    <button class='btn'>NEXT</button>
+
+</section>
+
+
+<h1 class='banner'>Make a profile!</h1>
+
+<section id='personal'>
+	<div class='container'>
+		<div class='pic-container'>
+			<img width='200px' ng-src="{{cleaner.pic_url}}">
+
+			<div class="file-upload-btn">
+			    <span>Upload a Picture</span>
+			    <input type="file" name="file" onchange="angular.element(this).scope().uploadPic(this.files)" />
+			</div>
+		</div>
+		<div class='info-container'>
+			<h2 class='name'>NAME</h2>
+			<textarea maxlength=200 ng-model='cleaner.blurb' class='blurb' placeholder="Tell us something nice about yourself! Where are you from? What do you like to do? What is your super power?"></textarea>
+			</p>
+			<div class='next'><button class='btn'>NEXT</button></div>
+		</div>
+	</div>
+</section>
+
+<section id='work-areas'>
+	<div class='panel'>
+		<h3 class='panel-title'>Where do you want to work?</h3>
+		<textarea class='panel-body' placeholder="IE: PARK SLOPE"></textarea>
+		<div class='next'><button class='btn'>NEXT</button></div>
+	</div>
+</section>
+
+<section id='scheduling'>
+
+	<div class='panel'>
+		<h3 class='panel-title'>When can you work?</h3>
+		<table id='schedule'>
+			<thead>
+				<tr>
+					<th>MON</th>
+					<th>TUE</th>
+					<th>WED</th>
+					<th>THU</th>
+					<th>FRI</th>
+					<th>SAT</th>
+					<th>SUN</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>8-12<span class='small'>pm</span></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>12-4<span class='small'>pm</span></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>4-8<span class='small'>pm</span></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class='next'><button class='btn'>NEXT</button></div>
+	</div>
+</section>
+
+<section id='services-provided'>
+	<div class='panel'>
+		<h3 class='panel-title'>What services do you provide?</h3>
+		<textarea class='panel-body' placeholder="IE: FLOOR WAXING"></textarea>
+		<div class='next'><button class='btn'>NEXT</button></div>
+	</div>
+</section>
+
+<section id='working-conditions'>
+	<div class='panel'>
+		<h3 class='panel-title'>What are your working conditions?</h3>
+		<textarea class='panel-body' placeholder="IE: I’m allergic to cats, Please provide your own cleaning products, I only work in teams, children should not be present, payments to be made in cash only. I like lavender scented candles."></textarea>
+		<div class='next'><button class='btn'>NEXT</button></div>
+	</div>
+</section>
+
+<section id='rates'>
+	<div class='panel'>
+		<h3 class='panel-title'>What are your rates?</h3>
+		<textarea class='panel-body' placeholder="IE:
+												$25/hour
+												$40 per session for a 2 bedroom apartment.
+												$10 extra for laundry"></textarea>
+		<div class='next'><button class='btn'>NEXT</button></div>
+	</div>
+</section>
+
+<section id='finished'>
+	<h1 class='banner'>Finished!</h1>
+	<button class='btn'>SEE PROFILE</button>
+</section>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

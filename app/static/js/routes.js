@@ -18,9 +18,27 @@ App.config(function($routeProvider) {
 			templateUrl: '/static/html/partials/index.html',
 			controller: IndexCntl,
 		})
+		.when('/upload', {
+			templateUrl: '/static/html/partials/upload.html',
+			controller: UploadCntl,
+		})
+		.when('/new', {
+			templateUrl: '/static/html/partials/new.html',
+			controller: NewCntl,
+		})
 		.when('/login', {
 			templateUrl: '/static/html/partials/login.html',
 			controller: LoginCntl,
+			resolve: {
+				newLogin: function() { return false; },
+			},
+		})
+		.when('/new/login', {
+			templateUrl: '/static/html/partials/login.html',
+			controller: LoginCntl,
+			resolve: {
+				newLogin: function() { return true; },
+			},
 		})
 		.when('/:keeperName', {
 			templateUrl: '/html/partials/keeperPage.html',

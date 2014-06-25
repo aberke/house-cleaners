@@ -25,11 +25,61 @@ function IndexCntl($scope) {
 
 	console.log('IndexCntl');
 }
+function NewCntl($scope, APIservice) {
 
-function LoginCntl($scope, AuthService, APIservice) {
+	$scope.servicesOptions = [
+		'SURFACES',
+		'LAUNDRY',
+		'ORGANIZING',
+		'RESIDENTIAL',
+		'OFFICES',
+		'GARDENING',
+		'PROVIDES OWN SUPPLIES',
+		'WINDOWS',
+	];
+
+	$scope.cleaner = {
+		_id: 3,
+		pic_url: "/static/img/user_icon.png",
+	};
+	$scope.uploadPic = function(files) {
+	    APIservice.PUTupload('/cleaner/2/pic/upload', files).then(function(data) {
+	    	$scope.cleaner.pic_url = data;
+	    });
+	}	
+}
+
+function UploadCntl($scope, $http, APIservice) {
+	$scope.pic_url = "/static/img/user_icon.png";
+
+
+	$scope.uploadPic = function(files) {
+	    APIservice.PUTupload('/cleaner/2/pic/upload', files).then(function(data) {
+	    	$scope.pic_url = data;
+	    });
+	}	
+}
+
+function LoginCntl($scope, AuthService, APIservice, newLogin) {
 
 	$scope.error = {};
-	$scope.user = {}; // if new user, user.new=true
+	$scope.user = {exists: false}; // if existing user, user.exists=true
+
+	$scope.submitUsername = function() {
+		//APIservice.GET('/cleaner/auth/')
+	}
+
+	$scope.submitNew = function() {
+		APIservice.POST('/cleaner/new', $scope.user).then(function(data) {
+			console.log('submitted new', data)
+		});
+	}
+
+	$scope.submitLogin = function() {
+		APIservice.POST('/cleaner/login', $scope.user).then(function(data) {
+			console.log('login returned', data);
+		});
+	}
 
 	$scope.submit = function() {
 		$scope.error = {};
@@ -62,7 +112,7 @@ function LoginCntl($scope, AuthService, APIservice) {
 		}
 	}
 
-	console.log('LoginCntl');
+	console.log('LoginCntl user', $scope.user);
 }
 
 function KeeperCntl($scope) {

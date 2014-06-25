@@ -32,6 +32,13 @@ Analytics
 ---
 Google analytics: https://www.google.com/analytics/web/?et&authuser=2#report/visitors-overview/a52152670w84607722p87675852/
 
+Image File Uploads
+---
+
+- Using Bill's AWS account with own set of keys
+- Storing files in /house-cleaners/pics bucket 
+	- file keys match cleaner _id's
+
 
 For Alex
 ===
@@ -62,7 +69,7 @@ header (show error message and logout if logged in)
 
 Back-End
 
-db.py
+database.py
 
 /cleaner
 /cleaner/auth/*
@@ -79,12 +86,14 @@ TODO
 
 
 
+before pushing to heroku
+	- setup heroku mongo and deploy with database to heroku
+	set environment variables (aws)
 
+- after pushing to heroku
+	- add google analytics to base
 
-
-
-
-
+- exception middleware - utilize after_request
 
 
 
