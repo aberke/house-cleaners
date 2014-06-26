@@ -15,10 +15,14 @@ AngularJS controllers
 *********************************************************************/
 
 
-function MainCntl($scope) {
-	//$scope.controller = "MainCntl";
+function MainCntl($scope, $window, $location) {
+	/* This controller's scope spans over all views */
 
-	console.log('MainCntl');
+	// google analytics -- log every new page view
+	$scope.$on('$routeChangeSuccess', function(event) {
+		$window.ga('send', 'pageview', { page: $location.path() });
+	});
+	
 }
 
 function IndexCntl($scope) {
@@ -27,96 +31,86 @@ function IndexCntl($scope) {
 }
 function NewCntl($scope, APIservice) {
 
-	$scope.servicesOptions = [
-		'SURFACES',
-		'LAUNDRY',
-		'ORGANIZING',
-		'RESIDENTIAL',
-		'OFFICES',
-		'GARDENING',
-		'PROVIDES OWN SUPPLIES',
-		'WINDOWS',
-	];
-
+	$scope.error = {};
 	$scope.cleaner = {
 		_id: 3,
 		pic_url: "/static/img/user_icon.png",
 	};
-	$scope.uploadPic = function(files) {
-	    APIservice.PUTupload('/cleaner/2/pic/upload', files).then(function(data) {
-	    	$scope.cleaner.pic_url = data;
-	    });
-	}	
-}
-
-function UploadCntl($scope, $http, APIservice) {
-	$scope.pic_url = "/static/img/user_icon.png";
-
-
-	$scope.uploadPic = function(files) {
-	    APIservice.PUTupload('/cleaner/2/pic/upload', files).then(function(data) {
-	    	$scope.pic_url = data;
-	    });
-	}	
-}
-
-function LoginCntl($scope, AuthService, APIservice, newLogin) {
-
-	$scope.error = {};
-	$scope.user = {exists: false}; // if existing user, user.exists=true
-
-	$scope.submitUsername = function() {
-		//APIservice.GET('/cleaner/auth/')
+	$scope.stage;
+	$scope.next = function() {
+		$scope.stage += 1;
 	}
-
-	$scope.submitNew = function() {
-		APIservice.POST('/cleaner/new', $scope.user).then(function(data) {
-			console.log('submitted new', data)
-		});
+	$scope.back = function() {
+		$scope.stage -= 1;
 	}
-
-	$scope.submitLogin = function() {
-		APIservice.POST('/cleaner/login', $scope.user).then(function(data) {
-			console.log('login returned', data);
-		});
-	}
-
-	$scope.submit = function() {
+	$scope.submitPhonenumber = function() {
+		// clear out old error
 		$scope.error = {};
-		if (!$scope.user.phonenumber) {
-			$scope.error.phonenumber = true;
+		/* ensure that phonenumber is new
+			if not: err
+			if so: increment stage appropriately
+		*/
+		var phonenumber = $scope.cleaner.phonenumber;
+		if (!phonenumber) {
+			console.log('ERROR: TODO');
+			return;
 		}
-		if (!$scope.user.password) {
+		APIservice.GET('/cleaner/lookup/phonenumber/' + phonenumber).then(function(data) {
+			console.log('lookup:', data, typeof data);
+			if (data != null && data != 'null') {
+				console.log('ERROR: TODO');
+				$scope.error.phonenumber = true;
+				return;
+			}
+			$scope.stage = 1;
+		});
+	}
+	$scope.submitPassword = function() {
+		/* POSTs new user */
+
+		// clear old error
+		$scope.error = {};
+
+		if (!$scope.cleaner.password) {
 			$scope.error.password = true;
 		}
-
-		if ($scope.user.new) {
-			if (!$scope.user.name) {
-				$scope.error.name = true;
-			}
-			if (!$scope.user.confirmPassword || $scope.user.confirmPassword != $scope.user.password) {
-				$scope.error.confirmPassword = true;
-			}
+		if (!$scope.cleaner.confirmPassword || $scope.cleaner.confirmPassword != $scope.cleaner.password) {
+			$scope.error.confirmPassword = true;
 		}
-
-		if ($scope.error.phonenumber||$scope.error.password||$scope.error.name||$scope.error.confirmPassword) {
+		if ($scope.error.phonenumber||$scope.error.password||$scope.error.confirmPassword) {
 			console.log('error',$scope.error)
 			return false;
 		}
-		// login/create new user
-		console.log('submit', $scope.user)
-		if ($scope.user.new) {
-			APIService.POST('/user', $scope.user).then(function(data) {
-
-			});
-		}
+		APIservice.POST('/cleaner/profile', $scope.cleaner).then(function(data) {
+			console.log('submitted new profile', data)
+			$scope.cleaner._id = data._id;
+			$scope.stage = 2;
+		});
 	}
 
-	console.log('LoginCntl user', $scope.user);
+	$scope.uploadPic = function(files) {
+	    APIservice.PUTupload('/cleaner/' + $scope.cleaner._id + '/pic/upload', files).then(function(data) {
+	    	$scope.cleaner.pic_url = data;
+	    });
+	}
+	$scope.submitProfile = function() {
+		APIservice.PUT('/cleaner/profile/' + $scope.cleaner._id, $scope.cleaner).then(function(data) {
+			console.log('submitProfile returned', data);
+			$scope.next();
+		});
+	}
+
+	function init() {
+		$scope.stage = 0;
+	}
+	init();
 }
 
-function KeeperCntl($scope) {
 
+
+function ProfileCntl($scope, APIservice, cleaner) {
+
+	$scope.cleaner = cleaner;
 	console.log('KeeperCntl');
 }
 

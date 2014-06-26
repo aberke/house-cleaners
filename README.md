@@ -84,25 +84,26 @@ TODO
 ---
 
 
-
-
-before pushing to heroku
-	- setup heroku mongo and deploy with database to heroku
-	set environment variables (aws)
-
-- after pushing to heroku
-	- add google analytics to base
+- never return entire profile in response -- dump public version
 
 - exception middleware - utilize after_request
 
 
 
+- use different AWS account?
+- Take Bill's card off heroku account
 
 
 
+Production Notes
+===
 
+- on Heroku under berke.alexandra@gmail.com account
+	- free tier
+	- Take off Bill's credit card (went on for MongoHQ but shouldn't be charging anything)
 
-
+- MongoHQ
+	- free tier
 
 
 

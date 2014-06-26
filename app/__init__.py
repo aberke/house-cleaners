@@ -36,13 +36,11 @@ def style_guide():
 	return send_file('static/html/style-guide.html')
 
 @app.route('/')
-@app.route('/upload')
 @app.route('/new')
 @app.route('/login')
-@app.route('/new/login')
-@app.route('/new/cleaner')
+@app.route('/profile/<phonenumber>')
 @app.route('/<cleanerName>')
-def base(cleanerName=None):
+def base(phonenumber=None, cleanerName=None):
 	return send_file('static/html/base.html')
 
 

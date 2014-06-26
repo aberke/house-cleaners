@@ -25,10 +25,13 @@
 }
 
 
-body {
+html,body {
 	margin: 0;
 	padding: 0;
 	background-color: #a0e4f9;
+}
+html,body, #view, .view {
+	height: 100%;
 }
 
 h1,h2,h3,h4,h5,p,li,a, td, th, span {
@@ -68,9 +71,11 @@ textarea {
 .btn.short {
 	width: 250px;
 }
+input,
 .text-field {
 	background-color: transparent;
 	border-color: white;
+	color: #29abe2;
 }
 ::-webkit-input-placeholder { color: #29abe2; }
 :-moz-placeholder { color: #29abe2; }
@@ -82,9 +87,16 @@ textarea {
 	background-color: #29abe2;
 	border-color: #29abe2;
 }
-.btn:hover, .btn.hover {
+.btn:hover, .btn.hover,
+.btn:disabled {
 	background-color: #54c0dd;
 	border-color: #54c0dd;
+}
+.btn:disabled {
+	cursor: default;
+}
+a.btn {
+	text-decoration: none;
 }
 .next {
 	text-align: right;
@@ -94,9 +106,17 @@ textarea {
 	border-color: #a0e4f9;
 	text-align: center;
 }
+.banner{
+	background-color: #ef7625;
+	color: white;
+	font-size: 4em;
+	padding: 0.1em;
+	text-align: center;
+}
 
 .panel {
 	max-width: 600px;
+	vertical-align: top;
 }
 .panel .panel-title {
 	color: white;
@@ -105,12 +125,28 @@ textarea {
 	padding: 0.5em;
 	text-align: center;
 }
+.panel.orange .panel-title {
+	background-color: #ef7625;
+}
+.panel.blue-3 .panel-title {
+	background-color: #29abe2;
+}
+.panel.info .panel-title {
+	text-align: left;
+}
 .panel .panel-body {
 	background-color: white;
 	padding: 1.5em;
+	color: #29abe2;
+}
+.panel.info .panel-body {
+	background-color: transparent;
+	padding: 1em 0;
+	color: #1b1464;
+	font-size: 1.2em;
+	height: 130px;
 }
 textarea.panel-body {
-	color: #a0e4f9;
 	height: 200px;
 }
 
@@ -162,6 +198,32 @@ input.error {
 /*** services-provided section ***/
 
 /*** personal section ***/
+section#personal .container {
+	max-width: 850px;
+	margin: auto;
+}
+#personal .info-container {
+	width: 500px;
+	vertical-align: bottom;
+}
+@media (max-width: 550px) {
+	section#personal .container {
+		text-align: center;
+	}
+	#personal .info-container {
+		width: auto;
+	}
+}
+section#personal p {
+}
+section#personal textarea,
+section#personal p {
+	margin: 10px 0;
+	color: #29abe2;
+	font-size: 24px;
+	font-weight: bold;
+	height: 150px;
+}
 #personal .pic-container, 
 #personal .info-container {
 	display: inline-block;
@@ -197,20 +259,23 @@ input.error {
 	opacity: 0;
 	filter: alpha(opacity=0);
 }
-#personal .info-container {
-	width: 300px;
-	vertical-align: bottom;
-}
 #personal .name {
 	color: #1b1464;
 	font-size: 2.5em;
-}
-#personal .blurb {
-	color: white;
+	margin: 10px 0;
 }
 
 /* ------- new-view ---------- */
+.back-btn {
+	border: none;
+	position: absolute;
+	color: white;
+	background: transparent;
+	margin-top: -50px;
+	cursor: pointer;
+}
 #new-view section {
+	height: 100%;
 	border-bottom: 3px solid white;
 	padding: 2.5em 0;
 }
@@ -221,22 +286,12 @@ input.error {
 #new-view section#services-provided{
 	background-color: #ef7625;
 }
-.banner{
-	background-color: #ef7625;
-	color: white;
-	font-size: 4em;
-	padding: 0.1em;
-	text-align: center;
-}
 #new-view section#personal{
 	background-color: #29abe2;
 }
-#new-view #personal .container {
-	max-width: 600px;
-	margin: auto;
-}
-#new-view section#personal textarea {
-	margin: 10px 0;
+#new-view section#create-username,
+#new-view section#create-username {
+	padding: 4em 0;
 }
 #new-view section#create-username input,
 #new-view section#create-username .btn,
@@ -244,6 +299,10 @@ input.error {
 #new-view section#create-password .btn{
 	display: block;
 	margin: 20px auto;
+}
+#new-view section#create-password .name {
+	color: #1b1464;
+	text-align: center;
 }
 #new-view section#work-areas {
 	background-color: #29abe2;
@@ -285,13 +344,58 @@ input.error {
 		margin: 10px auto;
 	}
 }
-/* ------- index-view ---------- */
+/* ---------------- index-view - */
 
-
-
-
+/* - profile-view ---------------- */
+#nav-bar, #footer-bar {
+	background-color: #1b1464;
+	padding: 1em;
+}
+#footer-bar {
+	text-align: center;
+	margin-top: 40px;
+}
+#nav-bar .title {
+	color: white;
+	text-align: center;
+}
+#profile-view section {
+	padding: 2em;
+}
+#profile-view section#personal{
+	background-color: white;
+}
+@media (max-width: 950px) {
+	#profile-view section#personal {
+		text-align: center;
+	}
+}
+#profile-view section#personal .pic-container {
+	vertical-align: top;
+}
+#profile-view #work-info {
+	max-width: 900px;
+	margin: auto;
+}
+#profile-view .panel {
+	width: 400px;
+	display: inline-block;
+	margin: 15px;
+}
+@media (max-width: 950px) {
+	#profile-view #work-info {
+		text-align: center;
+	}
+}
+/* ---------------- profile-view - */
 
 /* - style-guide ---------------- */
+
+/* need space between everything */
+#style-guide >* {
+	margin: 30px;
+}
+
 #style-guide #colors{
 	background-color: white;
 	padding: 10px;

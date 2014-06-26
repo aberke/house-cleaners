@@ -1,27 +1,30 @@
-<div id='new-view'>
+<div class='view' id='new-view'>
 
-<section id='create-username'>
+<section ng-show="stage==0" id='create-username'>
 
-    <input type='text' class='text-field' placeholder="What's your name?" >
-    <input type='text' class='text-field' placeholder="Your phone number?" >
-    <button class='btn'>NEXT</button>
-
-</section>
-<section id='create-password'>
-
-    <input type='text' class='text-field' placeholder="create a password" >
-    <input type='text' class='text-field' placeholder="confirm password" >
-    <button class='btn'>NEXT</button>
+    <input ng-model="cleaner.name" type='text' class='text-field' placeholder="What's your name?" >
+    <input ng-model="cleaner.phonenumber" ng-class="{'error':error.phonenumber}" type='text' class='text-field' placeholder="Your phone number?" >
+    <button ng-click="submitPhonenumber()" ng-disabled="!(cleaner.name&&cleaner.phonenumber)" class='btn'>NEXT</button>
 
 </section>
+<section ng-show="stage==1" id='create-password'>
+
+	<h2 class='name'>{{cleaner.name}}</h2>
+
+    <input ng-model="cleaner.password" ng-class="{'error':error.password}" type='text' class='text-field' placeholder="create a password" >
+    <input ng-model="cleaner.confirmPassword" ng-class="{'error':error.confirmPassword}" type='text' class='text-field' placeholder="confirm password" >
+    <button ng-click="submitPassword()" ng-disabled="!(cleaner.password&&cleaner.confirmPassword)" class='btn'>NEXT</button>
+
+</section>
 
 
-<h1 class='banner'>Make a profile!</h1>
+<h1 ng-show="stage>1&&stage<8" class='banner'>Make a profile!</h1>
+<button ng-click="back()" ng-show="stage>2&&stage<8" class='back-btn'>BACK</button>
 
-<section id='personal'>
+<section ng-show="stage==2" id='personal'>
 	<div class='container'>
 		<div class='pic-container'>
-			<img width='200px' ng-src="{{cleaner.pic_url}}">
+			<img height="250px" width='250px' ng-src="{{cleaner.pic_url}}">
 
 			<div class="file-upload-btn">
 			    <span>Upload a Picture</span>
@@ -31,21 +34,20 @@
 		<div class='info-container'>
 			<h2 class='name'>NAME</h2>
 			<textarea maxlength=200 ng-model='cleaner.blurb' class='blurb' placeholder="Tell us something nice about yourself! Where are you from? What do you like to do? What is your super power?"></textarea>
-			</p>
-			<div class='next'><button class='btn'>NEXT</button></div>
+			<div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
 		</div>
 	</div>
 </section>
 
-<section id='work-areas'>
+<section ng-show="stage==3" id='work-areas'>
 	<div class='panel'>
 		<h3 class='panel-title'>Where do you want to work?</h3>
-		<textarea class='panel-body' placeholder="IE: PARK SLOPE"></textarea>
-		<div class='next'><button class='btn'>NEXT</button></div>
+		<textarea ng-model="cleaner.locations_text" class='panel-body' placeholder="IE: PARK SLOPE"></textarea>
+		<div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
 	</div>
 </section>
 
-<section id='scheduling'>
+<section ng-show="stage==4" id='scheduling'>
 
 	<div class='panel'>
 		<h3 class='panel-title'>When can you work?</h3>
@@ -91,40 +93,40 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class='next'><button class='btn'>NEXT</button></div>
+		<div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
 	</div>
 </section>
 
-<section id='services-provided'>
+<section ng-show="stage==5" id='services-provided'>
 	<div class='panel'>
 		<h3 class='panel-title'>What services do you provide?</h3>
-		<textarea class='panel-body' placeholder="IE: FLOOR WAXING"></textarea>
-		<div class='next'><button class='btn'>NEXT</button></div>
+		<textarea ng-model="cleaner.services_text" class='panel-body' placeholder="IE: FLOOR WAXING"></textarea>
+		<div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
 	</div>
 </section>
 
-<section id='working-conditions'>
+<section ng-show="stage==6" id='working-conditions'>
 	<div class='panel'>
 		<h3 class='panel-title'>What are your working conditions?</h3>
-		<textarea class='panel-body' placeholder="IE: I’m allergic to cats, Please provide your own cleaning products, I only work in teams, children should not be present, payments to be made in cash only. I like lavender scented candles."></textarea>
-		<div class='next'><button class='btn'>NEXT</button></div>
+		<textarea ng-model="cleaner.conditions_text" class='panel-body' placeholder="IE: I’m allergic to cats, Please provide your own cleaning products, I only work in teams, children should not be present, payments to be made in cash only. I like lavender scented candles."></textarea>
+		<div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
 	</div>
 </section>
 
-<section id='rates'>
+<section ng-show="stage==7" id='rates'>
 	<div class='panel'>
 		<h3 class='panel-title'>What are your rates?</h3>
-		<textarea class='panel-body' placeholder="IE:
+		<textarea ng-model="cleaner.rates_text" class='panel-body' placeholder="IE:
 												$25/hour
 												$40 per session for a 2 bedroom apartment.
 												$10 extra for laundry"></textarea>
-		<div class='next'><button class='btn'>NEXT</button></div>
+		<div class='next'><button ng-click="submitProfile()" class='btn'>NEXT</button></div>
 	</div>
 </section>
 
-<section id='finished'>
+<section ng-show="stage==8" id='finished'>
 	<h1 class='banner'>Finished!</h1>
-	<button class='btn'>SEE PROFILE</button>
+	<a ng-href="/profile/{{cleaner.phonenumber}}" class='btn'>SEE PROFILE</a>
 </section>
 
 </div>

@@ -1,0 +1,81 @@
+
+<div id='nav-bar'>
+	<h1 class='title'>CLEAN SLATE</h1>
+</div>
+
+<div id='profile-view'>
+
+<section id='personal'>
+	<div class='container'>
+		<div class='pic-container'>
+			<img height="250px" width='250px' ng-src="{{cleaner.pic_url || '/static/img/user_icon.png'}}">
+		</div>
+		<div class='info-container'>
+			<h2 class='name'>{{cleaner.name || 'Name'}}</h2>
+			<p>{{cleaner.blurb}}</p>
+		</div>
+	</div>
+</section>
+
+<section id='work-info'>
+
+    <div class='panel info orange'>
+        <h3 class='panel-title'>SERVICES</h3>
+        <p class='panel-body'>{{cleaner.services_text}}</p>
+    </div>
+
+    <div class='panel info blue-3'>
+        <h3 class='panel-title'>LOCATIONS</h3>
+        <p class='panel-body'>{{cleaner.locations_text}}</p>
+    </div>
+
+    <div class='panel info blue-3'>
+        <h3 class='panel-title'>CONDITIONS</h3>
+        <p class='panel-body'>{{cleaner.conditions_text}}</p>
+    </div>
+
+    <div class='panel info orange'>
+        <h3 class='panel-title'>RATES</h3>
+        <p class='panel-body'>{{cleaner.rates_text}}</p>
+    </div>
+
+
+</section>
+
+
+<div id='footer-bar'>
+	<img height="30px" src="/static/img/sl_logo_100px.png">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

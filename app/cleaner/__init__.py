@@ -15,6 +15,7 @@
 from flask import Blueprint, request
 import json
 import hashlib, uuid # for passwords
+from bson import ObjectId
 
 from ..util import yellERROR, dumpJSON, respond500, respond200
 from ..database import db
@@ -49,18 +50,28 @@ Cleaner is the user model. Has
 	email (optional)
 	pic_url (stored on S3)
 	blurb
+	(text-fields until we decide how to do this better)
+	rates_text
+	services_text
+	locations_text
+	conditions_text
+
 """
 
 # -- API stuff --------------------------------------------------------
+
+def update_cleaner_profile(id, data):
+	# TODO - RAISE ERROR IF ret == 0?
+	ret = db.cleaners.update({ "_id": ObjectId(id) }, { "$set": data})
+	return ret
 
 @cleaner.route('/<id>/pic/upload', methods=['PUT', 'POST'])
 def upload_pic(id='0'):
 	try:
 		file = request.files['file']
-		print('-----upload_pic', id, file)
 
 		pic_url = s3.upload_pic(id, file)
-
+		update_cleaner_profile(id, {"pic_url": pic_url})
 		return pic_url
 	except Exception as e:
 		return respond500(e)
@@ -74,7 +85,7 @@ def GET_all_cleaners():
 
 @cleaner.route('/lookup/id/<id>')
 def GET_cleaner_by_id(id):
-	cleaner = db.cleaners.find_one({"_id": id})
+	cleaner = db.cleaners.find_one({"_id": ObjectId(id)})
 	return dumpJSON(cleaner)
 
 @cleaner.route('/lookup/phonenumber/<phonenumber>')
@@ -104,15 +115,30 @@ def POST_login():
 		return respond500(e)
 
 
-@cleaner.route('/new', methods=['POST'])
-def POST_new():
+@cleaner.route('/profile/<id>', methods=['PUT'])
+def PUT_profile(id):
 	try:
 		data = json.loads(request.data)
-		ret = insert_new_cleaner(data)
+		ret = update_cleaner_profile(id, {
+			"blurb": (data["blurb"] if "blurb" in data else ""),
+			"rates_text": (data["rates_text"] if "rates_text" in data else ""),
+			"services_text": (data["services_text"] if "services_text" in data else ""),
+			"locations_text": (data["locations_text"] if "locations_text" in data else ""),
+			"conditions_text": (data["conditions_text"] if "conditions_text" in data else "")
+		})
 		return dumpJSON(ret)
 	except Exception as e:
 		return respond500(e)
 
+
+@cleaner.route('/profile', methods=['POST'])
+def POST_profile():
+	try:
+		data = json.loads(request.data)
+		id = insert_new_cleaner(data)
+		return dumpJSON({"_id": id})
+	except Exception as e:
+		return respond500(e)
 
 
 
@@ -122,7 +148,7 @@ def hash_password(password, salt):
 	return hashlib.sha512(password + salt).hexdigest()
 
 def insert_new_cleaner(data):
-	if not (data['phonenumber'] and data['password']):
+	if not ('phonenumber' in data and data['password']):
 		raise Exception('new cleaner data must include phonenumber and password')
 
 	if db.cleaners.find_one({"phonenumber": data["phonenumber"]}):
@@ -132,6 +158,7 @@ def insert_new_cleaner(data):
 	hashed_pwd = hash_password(data["password"], salt)
 
 	ret = db.cleaners.insert({
+		"name": data["name"],
 		"phonenumber": data['phonenumber'],
 		"salt": salt,
 		"hashed_pwd": hashed_pwd,

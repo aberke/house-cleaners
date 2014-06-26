@@ -10,6 +10,8 @@
 
 ****************************************************/
 
+var AuthService = function() {};
+
 var APIservice = function($rootScope, $http, $q){
   /* $rootScope broadcasts errors */
 
@@ -83,5 +85,4 @@ var APIservice = function($rootScope, $http, $q){
 
 };
 
-};
 

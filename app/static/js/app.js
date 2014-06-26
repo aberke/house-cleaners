@@ -28,8 +28,10 @@ var App = angular.module('App', ['ngRoute'])
 		$provide.service('AuthService', AuthService);
 
 		// register directives
-		// $compileProvider.directive('error', error);
+		$compileProvider.directive('error', error);
 		
 		// register factories
 		// $provide.factory('UserFactory', UserFactory);
 	});
+
+	// App.config --> routes in routes.js

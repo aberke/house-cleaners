@@ -18,35 +18,25 @@ App.config(function($routeProvider) {
 			templateUrl: '/static/html/partials/index.html',
 			controller: IndexCntl,
 		})
-		.when('/upload', {
-			templateUrl: '/static/html/partials/upload.html',
-			controller: UploadCntl,
-		})
 		.when('/new', {
 			templateUrl: '/static/html/partials/new.html',
 			controller: NewCntl,
 		})
 		.when('/login', {
 			templateUrl: '/static/html/partials/login.html',
-			controller: LoginCntl,
-			resolve: {
-				newLogin: function() { return false; },
-			},
 		})
-		.when('/new/login', {
-			templateUrl: '/static/html/partials/login.html',
-			controller: LoginCntl,
-			resolve: {
-				newLogin: function() { return true; },
-			},
+		.when('/profile', {
+			templateUrl: '/static/html/partials/profile.html',
 		})
-		.when('/:keeperName', {
-			templateUrl: '/html/partials/keeperPage.html',
-			controller: KeeperCntl,
+		.when('/profile/:phonenumber', {
+			templateUrl: '/static/html/partials/profile.html',
+			controller: ProfileCntl,
 			resolve: {
-				keeper: function(APIservice, $route) {
-						return APIservice.GET($route.current.params.keeperName)
-							.then(function(data) { return data; });
+				cleaner: function(APIservice, $route) {
+						return APIservice.GET("/cleaner/lookup/phonenumber/" + $route.current.params.phonenumber)
+							.then(function(data) { 
+								console.log('cleaner', data)
+								return data; });
 					},
 				},
 		})
@@ -54,3 +44,4 @@ App.config(function($routeProvider) {
 			redirectTo: '/'
 		});
 });
+
