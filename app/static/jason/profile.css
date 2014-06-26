@@ -46,12 +46,12 @@ h1,h2,h3,h4,h5,h6 {
 	vertical-align: top;
 }
 #left-container {
-	width: 350px;
+	max-width: 350px;
 	text-align: center;
 }
 #right-container {
-	width: 550px;
-	padding: 0 20px;
+	max-width: 550px;
+	padding: 0 30px;
 }
 #left-container p {
 	font-weight: bold;
