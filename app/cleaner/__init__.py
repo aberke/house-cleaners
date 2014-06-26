@@ -80,11 +80,14 @@ def upload_pic(id='0'):
 
 @cleaner.route('/all')
 def GET_all_cleaners():
-	print('-------- /all')
-	print('db.cleaners', db.cleaners)
-	cleaners = db.cleaners.find()
-	print(cleaners, '-----------------------------')
-	return dumpJSON([c for c in cleaners])
+	try:
+		print('-------- /all')
+		print('db.cleaners', db.cleaners)
+		cleaners = db.cleaners.find()
+		print(cleaners, '-----------------------------cleaners')
+		return dumpJSON([c for c in cleaners])
+	except Exception as e:
+		return respond500(e)
 
 
 @cleaner.route('/lookup/id/<id>')
