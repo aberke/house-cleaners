@@ -50,6 +50,7 @@ Cleaner is the user model. Has
 	email (optional)
 	pic_url (stored on S3)
 	blurb
+
 	(text-fields until we decide how to do this better)
 	rates_text
 	services_text
@@ -79,7 +80,10 @@ def upload_pic(id='0'):
 
 @cleaner.route('/all')
 def GET_all_cleaners():
+	print('-------- /all')
+	print('db.cleaners', db.cleaners)
 	cleaners = db.cleaners.find()
+	print(cleaners, '-----------------------------')
 	return dumpJSON([c for c in cleaners])
 
 
