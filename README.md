@@ -32,6 +32,17 @@ Analytics
 ---
 Google analytics: https://www.google.com/analytics/web/?et&authuser=2#report/visitors-overview/a52152670w84607722p87675852/
 
+
+Production Notes
+===
+
+- on Heroku under berke.alexandra@gmail.com account
+	- free tier
+	- Take off Bill's credit card (went on for MongoHQ but shouldn't be charging anything)
+
+- MongoHQ
+	- free tier
+
 Image File Uploads
 ---
 
@@ -90,21 +101,9 @@ TODO
 - exception middleware - utilize after_request
 
 
-
-- use different AWS account?
 - Take Bill's card off heroku account
 
 
-
-Production Notes
-===
-
-- on Heroku under berke.alexandra@gmail.com account
-	- free tier
-	- Take off Bill's credit card (went on for MongoHQ but shouldn't be charging anything)
-
-- MongoHQ
-	- free tier
 
 
 
