@@ -47,6 +47,10 @@ SECRET_KEY 				= os.getenv('SESSION_SECRET', 'Significance')
 # AWS_ACCESS_KEY_ID		= os.environ['AWS_ACCESS_KEY_ID']
 # AWS_SECRET_ACCESS_KEY	= os.environ['AWS_SECRET_ACCESS_KEY']
 
-
+print('config--------------------')
+print('ENVIRONMENT', ENVIRONMENT)
+print('MONGODB_DB', MONGODB_DB)
+print('MONGODB_HOST', MONGODB_HOST)
+print('config--------------------')
 
 del os
