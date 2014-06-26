@@ -89,6 +89,7 @@ function NewCntl($scope, APIservice) {
 	}
 
 	$scope.uploadPic = function(files) {
+		$scope.cleaner.pic_url = '';
 	    APIservice.PUTupload('/cleaner/' + $scope.cleaner._id + '/pic/upload', files).then(function(data) {
 	    	$scope.cleaner.pic_url = data;
 	    });

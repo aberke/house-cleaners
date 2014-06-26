@@ -14,7 +14,7 @@
 import boto # using boto for connecting to s3
 
 S3_URL = "https://s3.amazonaws.com"
-BUCKET_NAME = 'house-cleaners'
+BUCKET_NAME = 'cleaners'
 ALLOWED_PIC_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 

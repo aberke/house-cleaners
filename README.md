@@ -35,8 +35,9 @@ Google analytics: https://www.google.com/analytics/web/?et&authuser=2#report/vis
 Image File Uploads
 ---
 
-- Using Bill's AWS account with own set of keys
-- Storing files in /house-cleaners/pics bucket 
+- Using shared annie@significancelabs.org AWS account
+	- keys belong to user alex who belongs to group breathingspace
+- Storing files in /cleaners/pics bucket 
 	- file keys match cleaner _id's
 
 
