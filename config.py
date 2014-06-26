@@ -35,6 +35,7 @@ MONGODB_DB 		= "house-cleaners"
 
 if ENVIRONMENT == 'PRODUCTION':
 	MONGODB_HOST=os.environ.get("MONGOHQ_URL", None)
+	MONGODB_DB  = 'app26701254'
 
 elif ENVIRONMENT == 'TESTING':
 	MONGODB_DB 	= "house-cleaners-testing"
