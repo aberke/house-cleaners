@@ -38,7 +38,5 @@ def connect():
 
 db = connect()
 
-print('----------db', db)
-
 
 

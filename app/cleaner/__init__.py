@@ -81,10 +81,7 @@ def upload_pic(id='0'):
 @cleaner.route('/all')
 def GET_all_cleaners():
 	try:
-		print('-------- /all')
-		print('db.cleaners', db.cleaners)
 		cleaners = db.cleaners.find()
-		print(cleaners, '-----------------------------cleaners')
 		return dumpJSON([c for c in cleaners])
 	except Exception as e:
 		return respond500(e)
@@ -133,7 +130,7 @@ def PUT_profile(id):
 			"locations_text": (data["locations_text"] if "locations_text" in data else ""),
 			"conditions_text": (data["conditions_text"] if "conditions_text" in data else "")
 		})
-		return dumpJSON(ret)
+		return respond200()
 	except Exception as e:
 		return respond500(e)
 
