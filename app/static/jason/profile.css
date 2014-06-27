@@ -19,27 +19,24 @@ body {
 }
 h1, h2, h3, p{
 	font-family: Montserrat-Regular;
+	word-wrap: break-word;
 }
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3 {
 	font-weight: bold;
+	line-height: 1em;
 }
 
 #background {
-	position: fixed;
-	top: 150px;
+	position: absolute;
+	top: 160px;
 	background-color: #a0e4f9;
 	z-index: -1;
-	height: 400px;
+	height: 450px;
 	width: 100%;
 }
 #content{
 	max-width: 1000px;
 	margin: 50px auto;
-}
-@media (max-width: 999px) {
-	#content {
-		text-align: center;
-	}
 }
 #left-container,#right-container{
 	display: inline-block;
@@ -57,8 +54,12 @@ h1,h2,h3,h4,h5,h6 {
 	font-weight: bold;
 	margin: 0;
 }
-#right-container h3 {
+#left-container h3,
+#right-container h2 {
 	margin: 0;
+}
+#right-container h3 {
+	margin: 2em 0;
 }
 #list {
 	margin: 20px 0;
@@ -67,7 +68,7 @@ h1,h2,h3,h4,h5,h6 {
 	margin: 0;
 }
 #title {
-	margin: 30px 0 50px 0;
+	font-size: 2.5em;
 }
 
 
@@ -76,3 +77,13 @@ img#profile-pic {
 	border-radius: 50%;
 	margin-bottom: 20px;
 }
+
+@media (max-width: 999px) {
+
+	#right-container, #left-container {
+		max-width: 300px;
+		display: block;
+		margin: auto;
+	}
+}
+
