@@ -156,13 +156,18 @@ function NewCntl($scope, APIservice) {
 function LoginCntl($scope, $rootScope, $location, APIservice, UserService) {
 
 	$scope.cleaner = {};
+	$scope.error = {};
 
 	$scope.login = function() {
-		var onSuccess = function(data) {
+		$scope.error = {};
+		var errorCallback = function(message) {
+			$scope.error.message = message;
+		}
+		var successCallback = function(data) {
 			$rootScope.user = data;
 			$location.path('/profile/' + $scope.cleaner.phonenumber); 
 		}
-		UserService.login($scope.cleaner).then(onSuccess);
+		UserService.login($scope.cleaner).then(successCallback, errorCallback);
 	}
 	console.log('LoginCntl')
 }
