@@ -40,3 +40,15 @@ db = connect()
 
 
 
+
+
+
+# -------- FOR COMMAND-LINE TESTING USE ------------------
+
+def drop_cleaners():
+	return db.cleaners.remove()
+
+# -------- FOR COMMAND-LINE TESTING USE ------------------
+
+
+

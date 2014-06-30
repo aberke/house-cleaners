@@ -13,7 +13,7 @@
 
 
 
-var App = angular.module('App', ['ngRoute'])
+var App = angular.module('App', ['ngRoute', 'houseCleanersFilters'])
 
 	.config(function($locationProvider) {
 
@@ -25,10 +25,10 @@ var App = angular.module('App', ['ngRoute'])
 
 		// register services
 		$provide.service('APIservice', APIservice);
-		$provide.service('AuthService', AuthService);
+		$provide.service('UserService', UserService);
 
 		// register directives
-		$compileProvider.directive('error', error);
+		// $compileProvider.directive('error', error);
 		
 		// register factories
 		// $provide.factory('UserFactory', UserFactory);

@@ -17,6 +17,8 @@
 from flask import Flask, send_file
 from flask.ext.compress import Compress
 
+import twilio_tools as twilio_tools
+
 
 
 # Configuration ----------------------------------------------
@@ -37,7 +39,9 @@ def style_guide():
 
 @app.route('/')
 @app.route('/new')
-@app.route('/login')
+@app.route('/test')
+@app.route('/sign-in')
+@app.route('/reset-password')
 @app.route('/profile/<phonenumber>')
 @app.route('/<cleanerName>')
 def base(phonenumber=None, cleanerName=None):
@@ -51,6 +55,13 @@ def jason_experiment():
 
 
 
+
+# testing
+@app.route('/sms')
+@app.route('/sms/<number>')
+def send_sms(number='6178348458'):
+	twilio_tools.send_SMS(number, 'hi')
+	return 'OK'
 
 
 

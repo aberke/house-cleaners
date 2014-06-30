@@ -33,6 +33,7 @@ html,body {
 html,body, #view, .view {
 	height: 100%;
 }
+a { cursor: pointer; }
 
 h1,h2,h3,h4,h5,p,li,a, td, th, span {
 	font-family: Montserrat-Regular;
@@ -149,6 +150,11 @@ a.btn {
 textarea.panel-body {
 	height: 200px;
 }
+p.error {
+	margin: auto;
+	color: red;
+	text-align: center;
+}
 
 input.error {
 	border: 2px solid red;
@@ -206,7 +212,7 @@ section#personal .container {
 	width: 500px;
 	vertical-align: bottom;
 }
-@media (max-width: 550px) {
+@media (max-width: 850px) {
 	section#personal .container {
 		text-align: center;
 	}
@@ -359,8 +365,20 @@ section#personal p {
 	color: white;
 	text-align: center;
 }
+/* temporary nav stuff until i get design */
+#nav-bar div {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+#nav-bar a {
+	color: white;
+}
+#profile-view .error {
+	background-color: white;
+}
 #profile-view section {
-	padding: 2em;
+	padding: 1em;
 }
 #profile-view section#personal{
 	background-color: white;
@@ -373,18 +391,29 @@ section#personal p {
 #profile-view section#personal .pic-container {
 	vertical-align: top;
 }
+#profile-view textarea,
+#profile-view input {
+	border: 1px solid #29abe2;
+	background-color: white;
+	padding: 1em;
+}
 #profile-view #work-info {
 	max-width: 900px;
 	margin: auto;
 }
 #profile-view .panel {
-	width: 400px;
+	max-width: 400px;
+	width: 50%;
 	display: inline-block;
 	margin: 15px;
 }
 @media (max-width: 950px) {
 	#profile-view #work-info {
 		text-align: center;
+	}
+	#profile-view .panel {
+		width: 100%;
+		margin: 0;
 	}
 }
 /* ---------------- profile-view - */

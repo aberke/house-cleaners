@@ -18,13 +18,17 @@
 from flask import Response
 import json
 from bson import ObjectId
+from datetime import datetime
 
 
 class JSONEncoder(json.JSONEncoder):
+	# Custom JSONEncoder because by default, json cannot handle datetimes or ObjectIds """
     def default(self, o):
-        if isinstance(o, ObjectId):
-            return str(o)
-        return json.JSONEncoder.default(self, o)
+		if isinstance(o, datetime):
+			return str(o)
+		if isinstance(o, ObjectId):
+		    return str(o)
+		return json.JSONEncoder.default(self, o)
 
 encoder = JSONEncoder()
 

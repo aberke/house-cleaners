@@ -1,9 +1,18 @@
 
 <div id='nav-bar'>
 	<h1 class='title'>CLEAN SLATE</h1>
+    <div>
+        <a href="/">HOME</a>
+        <a ng-show="!user" href="/sign-in">SIGN-IN</a>
+        <a ng-show="user" ng-click="logout()">SIGN-OUT</a>
+        <a ng-show="user&&!editEnabled" ng-click="enableEdit()">EDIT</a>
+        <a ng-show="user&&editEnabled" ng-click="save()">SAVE</a>
+    </div>
 </div>
 
 <div id='profile-view'>
+
+<p class='error'>{{error.message}}</p>
 
 <section id='personal'>
 	<div class='container'>
@@ -11,8 +20,15 @@
 			<img height="250px" width='250px' ng-src="{{cleaner.pic_url || '/static/img/user_icon.png'}}">
 		</div>
 		<div class='info-container'>
-			<h2 class='name'>{{cleaner.name || 'Name'}}</h2>
-			<p>{{cleaner.blurb}}</p>
+            <span ng-show="!editEnabled">
+                <h2 class='name'>{{cleaner.name || 'Name'}}</h2>
+                <p>{{cleaner.blurb}}</p>
+            </span>
+
+            <span ng-show="editEnabled">
+                <input ng-model="cleaner.name" type='text' class='text-field' placeholder="NAME" >
+                <textarea maxlength=200 ng-model='cleaner.blurb' class='blurb' placeholder="Tell us something nice about yourself! Where are you from? What do you like to do? What is your super power?"></textarea>
+            </span>
 		</div>
 	</div>
 </section>
@@ -21,22 +37,26 @@
 
     <div class='panel info orange'>
         <h3 class='panel-title'>SERVICES</h3>
-        <p class='panel-body'>{{cleaner.services_text}}</p>
+        <p ng-show="!editEnabled" class='panel-body'>{{cleaner.services_text}}</p>
+        <textarea ng-show="editEnabled" ng-model="cleaner.services_text" class='panel-body' placeholder="IE: PARK SLOPE"></textarea>
     </div>
 
     <div class='panel info blue-3'>
         <h3 class='panel-title'>LOCATIONS</h3>
-        <p class='panel-body'>{{cleaner.locations_text}}</p>
+        <p ng-show="!editEnabled" class='panel-body'>{{cleaner.locations_text}}</p>
+        <textarea ng-show="editEnabled" ng-model="cleaner.locations_text" class='panel-body' placeholder="IE: PARK SLOPE"></textarea>
     </div>
 
     <div class='panel info blue-3'>
         <h3 class='panel-title'>CONDITIONS</h3>
-        <p class='panel-body'>{{cleaner.conditions_text}}</p>
+        <p ng-show="!editEnabled" class='panel-body'>{{cleaner.conditions_text}}</p>
+        <textarea ng-show="editEnabled" ng-model="cleaner.conditions_text" class='panel-body' placeholder="IE: PARK SLOPE"></textarea>
     </div>
 
     <div class='panel info orange'>
         <h3 class='panel-title'>RATES</h3>
-        <p class='panel-body'>{{cleaner.rates_text}}</p>
+        <p ng-show="!editEnabled" class='panel-body'>{{cleaner.rates_text}}</p>
+        <textarea ng-show="editEnabled" ng-model="cleaner.rates_text" class='panel-body' placeholder="IE: PARK SLOPE"></textarea>
     </div>
 
 

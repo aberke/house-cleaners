@@ -61,18 +61,17 @@ Organize
 Front-End
 
 base
-header (show error message and logout if logged in)
 
 / 			   
-	index.html  -> [signin]  [new]
-/login
-	login.html		  
-/new/login
-	login-new.html
+	index.html  -> [new] [signin] 
+/sign-in
+	sign-in.html
+/reset-password
+	reset-password.html
 
-/:cleanerName  -> profile page
-	cleanerProfile.html
-/new/cleaner
+/profile/:phonenumber  -> profile page
+	profile.html
+/new
 	[/new/login]
 	--------------
 	clenanerProfile.html
@@ -95,6 +94,11 @@ database.py
 TODO
 ---
 
+- refactor
+
+- admin whitelist
+
+- validating phonenumber client-side throughout sign-in flow
 
 - never return entire profile in response -- dump public version
 

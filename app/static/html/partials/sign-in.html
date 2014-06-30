@@ -1,0 +1,15 @@
+<div class='view sign-in' id='sign-in-view'>
+
+	<img class='logo' src='/static/img/sl_logo_100px.png'>
+	<h2 class='title'>WELCOME BACK!</h2>
+
+	<input ng-model="cleaner.phonenumber" type='text' class='text-field' placeholder="Phone number" >
+	<input ng-model="cleaner.password" ng-class="{'error':error.password}" type='text' class='text-field' placeholder="Password" >
+	<button ng-click="login()" ng-disabled="!(cleaner.phonenumber&&cleaner.password)" class='btn'>SIGN-IN</button>
+
+	<div class='other-options'>
+		<a class='left' href='/new'>I'm new!</a>
+		<a class='right' href='/reset-password'>Forgot my password!</a>
+	</div>
+
+</div>

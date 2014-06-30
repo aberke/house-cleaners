@@ -1,5 +1,7 @@
 <div id='index-view'>
 
+<a class='right' ng-show="user" ng-href="/profile/{{user.phonenumber}}">View Your Profile</a>
+
 	<h1 class='banner'>Welcome!</h1>
 
 	<section>
@@ -8,7 +10,7 @@
 		</p>
 
 		<a href="/new" class='btn short left'>GET STARTED</a>
-		<button class='btn short right'>SIGN-IN</button>
+		<a href="/sign-in" class='btn short right'>SIGN-IN</a>
 
 	</section>
 
