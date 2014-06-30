@@ -8,3 +8,4 @@ gunicorn==19.0.0
 itsdangerous==0.24
 pymongo==2.7.1
 wsgiref==0.1.2
+twilio==3.6.6

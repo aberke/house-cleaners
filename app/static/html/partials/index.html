@@ -1,6 +1,10 @@
 <div id='index-view'>
 
-<a class='right' ng-show="user" ng-href="/profile/{{user.phonenumber}}">View Your Profile</a>
+    <div id='temp' ng-show="user">
+        {{user.name}}
+		<a class='right' ng-href="/profile/{{user.phonenumber}}">View Profile</a>
+        <a ng-click="logout()">SIGN-OUT</a>
+    </div>
 
 	<h1 class='banner'>Welcome!</h1>
 
