@@ -14,6 +14,14 @@ AngularJS controllers
 
 *********************************************************************/
 
+// TODO: have JSON files for each set and load in
+var extras = ['Ironing', 'Dishes (by hand)', 
+	'Laundry', 'Organizing', 'Bringing own cleaning products',
+];
+
+console.log('extras', extras);
+
+
 
 function MainCntl($scope, $window, $location, APIservice, UserService) {
 	/* This controller's scope spans over all views */
@@ -53,7 +61,18 @@ function MainCntl($scope, $window, $location, APIservice, UserService) {
 	init();
 }
 
+// TODO: move
+var busy = function(t) {
+	if (t.className == 'busy') {
+		t.className = "";
+	} else {
+		t.className = "busy";
+	}
+}
+
 function NewCntl($scope, APIservice) {
+
+	//$scope.showAll = true; // true iff testing
 
 	$scope.error = {};
 	$scope.waiting = false;
@@ -66,7 +85,7 @@ function NewCntl($scope, APIservice) {
 		$scope.stage += 1;
 	}
 	$scope.back = function() {
-		if (stage < 3) { return; }
+		if ($scope.stage < 3) { return; }
 		$scope.stage -= 1;
 	}
 	$scope.submitPhonenumber = function() {
@@ -227,13 +246,50 @@ function ResetPasswordCntl($scope, $timeout, $location, APIservice) {
 }
 
 
-
+// TODO: move
+var activate = function(elt) {
+	// can't activate a busy cell
+	if (elt.className == "busy") {
+		return;
+	}
+	if (elt.className == "active") {
+		elt.className = "";
+	} else {
+		elt.className = "active";
+	}
+}
 function ProfileCntl($scope, APIservice, cleaner) {
 
 	$scope.error = {};
+	$scope.stage = 0;
+	$scope.booking = {};
 	$scope.cleaner = cleaner;
 	console.log('ProfileCntl - cleaner', cleaner);
 	$scope.editEnabled = false;
+
+	$scope.next = function() {
+		$scope.stage += 1;
+		if ($scope.stage == 4) {
+			postBooking(); // complete!
+		}
+	}
+	$scope.back = function() {
+		$scope.stage -= 1;
+	}
+
+	var postBooking = function() {
+		var data = {
+			'cleaner': $scope.cleaner,
+			'booking': $scope.booking,
+		}
+		var errorCallback = function(message) {
+			$scope.error.message = message;
+		}
+		var successCallback = function(data) {
+			console.log('successCallback', data)
+		}
+		APIservice.POST('/cleaner/booking', data).then(successCallback, errorCallback);
+	}
 
 	$scope.enableEdit = function() {
 		$scope.editEnabled = true;
@@ -250,6 +306,10 @@ function ProfileCntl($scope, APIservice, cleaner) {
 		}
 		APIservice.PUT('/cleaner/profile/' + $scope.cleaner._id, $scope.cleaner).then(successCallback, errorCallback);
 	}
+
+
+
+
 }
 
 

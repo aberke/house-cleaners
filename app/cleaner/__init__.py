@@ -113,6 +113,26 @@ def GET_validate_new_phonenumber(phonenumber):
 
 # ------------------------------------------------------- API stuff -
 
+
+
+# TODO - ORGANIZE
+@cleaner.route('/booking', methods=['POST'])
+def POSTbooking():
+	try:
+		data = json.loads(request.data)
+		cleaner = data['cleaner']
+		booking = data['booking']
+		cleaner = get_cleaner(id=cleaner['_id'])
+		
+		# send sms to cleaner
+		twilio_tools.send_SMS(cleaner['phonenumber'], str("You have a new CleanSlate appointment.\nTime: July 10, 12pm\nDuration: 3 hours\nClient Name: Aoife Byrne \nAddress: 43 Midwood Street, NT 11225."))
+		
+		# send sms to client
+		twilio_tools.send_SMS(booking['phonenumber'], str("You have a confirmed CleanSlate appointment with Jason.\nTime: July 10, 12pm\nDuration: 3 hours\nCost: $70"))
+		return respond200()
+	except Exception as e:
+		return respond500(e)
+
 # - Auth stuff -------------------------------------------------------
 
 import string

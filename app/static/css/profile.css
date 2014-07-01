@@ -1,0 +1,193 @@
+/***************************************************
+	Significance Labs
+	Brooklyn, NYC
+
+ 	Author: Alexandra Berke (aberke)
+ 	Written: June 2014
+
+
+
+	styles for profile view stuff
+
+
+	colors:
+		orange: #ef7625 
+		dark-blue: #29abe2 
+		light-blue: #a0e4f9 
+		purple: #1b1464
+
+****************************************************/
+
+
+#nav-bar, #footer-bar {
+	background-color: #1b1464;
+	padding: 1em;
+}
+#footer-bar {
+	text-align: center;
+}
+#nav-bar .title {
+	color: white;
+	text-align: center;
+}
+#nav-bar img.logo {
+	position: absolute;
+}
+
+#nav-bar .right-nav {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+#nav-bar a {
+	color: #29abe2;
+	font-weight: bold;
+	text-decoration: none;
+	margin: 0 10px;
+}
+#profile-view .error {
+	background-color: white;
+}
+#profile-view section {
+	padding: 3em 1em;
+}
+#profile-view section#personal{
+	background-color: white;
+}
+@media (max-width: 950px) {
+	#profile-view section#personal {
+		text-align: center;
+	}
+}
+#profile-view section#personal .pic-container {
+	vertical-align: top;
+}
+section#personal .info-container {
+	text-align: left;
+}
+
+#profile-view #work-info {
+	max-width: 900px;
+	margin: auto;
+}
+#profile-view .panel.info {
+	max-width: 400px;
+	width: 50%;
+	display: inline-block;
+	margin: 15px;
+}
+@media (max-width: 950px) {
+	#profile-view #work-info {
+		text-align: center;
+	}
+	#profile-view .panel.info {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+section#get-quote {
+	background-color: #29abe2;
+}
+.get-quote-section, .get-quote-section h3 {
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 20px;
+}
+.get-quote-section h3 {
+	color: #1b1464;
+	border-bottom: 3px solid #ef7625;
+	width: 100%;
+}
+.get-quote-section p{
+	font-size: 13px;
+}
+.get-quote-section .input-group {
+	display: inline-block;
+	margin: 5px;
+	margin-right: 20px;
+	font-size: 18px;
+}
+.get-quote-section input[type=number] {
+	width: 20px;
+}
+@media (min-width: 750px) {
+	.get-quote-section#space {
+		width: 360px;
+		margin-right: 60px;
+	}
+}
+.get-quote-section#extras {
+	width: 100%;
+}
+.get-quote-section#extras .conditions{
+	margin-top: 20px;
+}
+@media (min-width: 750px) {
+	.get-quote-section#extras .conditions{
+		width: 50%;	
+	}
+}
+#get-quote .action-bubble {
+	float: right;
+	margin-top: -100px;
+}
+
+
+
+
+section#book-apt{
+	background-color: #ef7625;
+}
+
+
+section#availability .action-bubble{
+	margin: auto;
+	display: block;
+}
+
+/* -------- section#show-quote --------*/
+section#show-quote {
+	background-color: white;
+}
+#quote-container {
+	max-width: 300px;
+	border: 1px solid #29abe2;
+	background-color: #a0e4f9;
+	border-radius: 6px;
+	margin: auto;
+}
+#quote-container .x-close {
+	float: right;
+	color: white;
+	padding: 0 6px;
+}
+#quote-container .text {
+	font-size: 1.5em;
+	padding: 1em;
+}
+#quote-container .btn {
+	margin: auto;
+	display: block;
+	width: 200px;
+}
+#quote-container .disclaimer-text {
+	color: white;
+	margin: 5px auto 10px auto;
+	width: 200px;
+	font-size: 12px;
+}
+/* -------- section#show-quote --------*/
+
+section#confirmation {
+	background-color: white;
+	text-align: center;
+}
+section#confirmation h3 {
+	color: #1b1464;
+	margin: auto;
+	max-width: 600px;
+}
+
+
+/* ---------------- profile-view - */

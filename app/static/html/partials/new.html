@@ -1,7 +1,7 @@
 <div class='view' id='new-view'>
 
 
-<section class='sign-in' ng-show="stage==0" id='create-username'>
+<section class='sign-in' ng-show="stage==0||showAll" id='create-username'>
 	<p class='error'>{{error.message}}</p>
 
     <input ng-model="cleaner.name" type='text' class='text-field' placeholder="What's your name?" >
@@ -10,7 +10,7 @@
     <p ng-show='waiting'>verifying phonenumber...</p>
 
 </section>
-<section ng-show="stage==1" id='create-password'>
+<section ng-show="stage==1||showAll" id='create-password'>
 
 	<h2 class='name'>{{cleaner.name}}</h2>
 	<p class='error'>{{error.message}}</p>
@@ -23,9 +23,9 @@
 
 
 <h1 ng-show="stage>1&&stage<8" class='banner'>Make a profile!</h1>
-<button ng-click="back()" ng-show="stage>2&&stage<8" class='back-btn'>BACK</button>
+<button ng-click="back()" ng-show="stage>2&&stage<10" class='back-btn'>BACK</button>
 
-<section ng-show="stage==2" id='personal'>
+<section ng-show="stage==2||showAll" id='personal'>
 	<div class='container'>
 		<div class='pic-container'>
 			<img height="250px" width='250px' ng-src="{{cleaner.pic_url}}">
@@ -43,15 +43,16 @@
 	</div>
 </section>
 
-<section ng-show="stage==3" id='work-areas'>
+
+<section ng-show="stage==3||showAll" id='rates'>
 	<div class='panel'>
-		<h3 class='panel-title'>Where do you want to work?</h3>
-		<textarea ng-model="cleaner.locations_text" class='panel-body' placeholder="IE: PARK SLOPE"></textarea>
-		<div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
+		<h3 class='panel-title'>What is your desired hourly wage?</h3>
+		<textarea ng-model="cleaner.rates_text" class='panel-body' placeholder="IE: $25/hour"></textarea>
+		<div class='next'><button ng-click="submitProfile()" class='btn'>NEXT</button></div>
 	</div>
 </section>
 
-<section ng-show="stage==4" id='scheduling'>
+<section ng-show="stage==4||showAll" id='scheduling'>
 
 	<div class='panel'>
 		<h3 class='panel-title'>When can you work?</h3>
@@ -69,31 +70,31 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>8-12<span class='small'>pm</span></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td onclick="busy(this)">8-12<span class='small'>pm</span></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
 				</tr>
 				<tr>
-					<td>12-4<span class='small'>pm</span></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td onclick="busy(this)">12-4<span class='small'>pm</span></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
 				</tr>
 				<tr>
-					<td>4-8<span class='small'>pm</span></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td onclick="busy(this)">4-8<span class='small'>pm</span></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
+					<td onclick="busy(this)"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -101,34 +102,109 @@
 	</div>
 </section>
 
-<section ng-show="stage==5" id='services-provided'>
+<section ng-show="stage==5||showAll" id='services-provided'>
+
+    <div class='panel two-sides'>
+        <h3 class='panel-title'>What extra services do you provide?</h3>
+        <div class='panel-body'>
+            <div class='side'>
+                <p>Click the services you can provide.</p>
+                <div>
+                    <input type='checkbox'>
+                    <label>Indoor smoking</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Dogs present</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Cats present</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Non-Eco cleaning products</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Children present</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Naked clients</label>
+                </div>
+            </div>
+            <div class='side'>
+                <p>If you charge extra for this, set a price:</p>
+                <input type="number" placeholder="5.00">
+                <input type="number" placeholder="5.00">
+                <input type="number" placeholder="5.00">
+                <input type="number" placeholder="5.00">
+                <input type="number" placeholder="5.00">
+            </div>
+        </div>
+        <div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
+    </div>
+</section>
+
+<section ng-show="stage==6||showAll" id='working-conditions'>
+
+    <div class='panel two-sides'>
+        <h3 class='panel-title'>Working Conditions:</h3>
+        <div class='panel-body'>
+            <div class='side'>
+                <p>What conditions are you willing to work with?</p>
+                <div>
+                    <input type='checkbox'>
+                    <label>Dishes (by hand)</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Organizing</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Deep clean</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Post event clean</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Bring cleaning products</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Clean inside fridge</label>
+                </div>
+                <div>
+                    <input type='checkbox'>
+                    <label>Clean inside oven</label>
+                </div>
+            </div>
+            <div class='side'>
+                <p>If you charge extra for this, set a price:</p>
+                <input type="number" placeholder="5.00">
+                <input type="number" placeholder="5.00">
+                <input type="number" placeholder="5.00">
+                <input type="number" placeholder="5.00">
+                <input type="number" placeholder="5.00">
+            </div>
+        </div>
+        <div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
+    </div>
+</section>
+
+<section ng-show="stage==7||showAll" id='work-areas'>
 	<div class='panel'>
-		<h3 class='panel-title'>What services do you provide?</h3>
-		<textarea ng-model="cleaner.services_text" class='panel-body' placeholder="IE: FLOOR WAXING"></textarea>
+		<h3 class='panel-title'>Where do you want to work?</h3>
+		<img class='panel-body' src="/static/img/NYC_MAP1240px.png">
 		<div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
 	</div>
 </section>
 
-<section ng-show="stage==6" id='working-conditions'>
-	<div class='panel'>
-		<h3 class='panel-title'>What are your working conditions?</h3>
-		<textarea ng-model="cleaner.conditions_text" class='panel-body' placeholder="IE: I’m allergic to cats, Please provide your own cleaning products, I only work in teams, children should not be present, payments to be made in cash only. I like lavender scented candles."></textarea>
-		<div class='next'><button ng-click="next()" class='btn'>NEXT</button></div>
-	</div>
-</section>
-
-<section ng-show="stage==7" id='rates'>
-	<div class='panel'>
-		<h3 class='panel-title'>What are your rates?</h3>
-		<textarea ng-model="cleaner.rates_text" class='panel-body' placeholder="IE:
-												$25/hour
-												$40 per session for a 2 bedroom apartment.
-												$10 extra for laundry"></textarea>
-		<div class='next'><button ng-click="submitProfile()" class='btn'>NEXT</button></div>
-	</div>
-</section>
-
-<section ng-show="stage==8" id='finished'>
+<section ng-show="stage==8||showAll" id='finished'>
 	<h1 class='banner'>Finished!</h1>
 	<a ng-href="/profile/{{cleaner.phonenumber}}" class='btn'>SEE PROFILE</a>
 </section>

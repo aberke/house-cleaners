@@ -107,6 +107,9 @@ TODO
 
 - Take Bill's card off heroku account
 
+- make /new responsive
+	- use showAll=true
+
 
 
 
