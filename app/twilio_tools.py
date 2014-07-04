@@ -36,7 +36,24 @@ def send_SMS(to, body):
 			raise e
 
 
+def send_booking_confirmations(cleaner, booking):
+	""" Send SMS confirmation to both cleaner and client regarding new booking 
+			cleaner and booking are both dictionaries
+			booking contains the time/duration/rate information
+	"""
+	# TODO - get time/duration/address/cost from booking dictionary
+	time = "July 10, 12pm"
+	duration = "3 hours"
+	client_name = "Aoife Byrne"
+	cleaner_name = cleaner['name']
+	address = "43 Midwood Street, NT 11225"
+	cost = "$70"
 
+	cleaner_msg = "You have a new CleanSlate appointment.\nTime: {0}\nDuration: {1}\nClient Name: {2} \nAddress: {3}.".format(time, duration, client_name, address) 
+	client_msg = "You have a confirmed CleanSlate appointment with {0}.\nTime: {1}\nDuration: {2}\nCost: {3}".format(cleaner_name, time, duration, cost)
+
+	send_SMS(cleaner['phonenumber'], cleaner_msg)
+	send_SMS(booking['phonenumber'], client_msg)
 
 
 

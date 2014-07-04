@@ -25,13 +25,8 @@ var App = angular.module('App', ['ngRoute', 'houseCleanersFilters'])
 
 		// register services
 		$provide.service('APIservice', APIservice);
-		$provide.service('UserService', UserService);
+		$provide.service('AuthService', AuthService);
 
-		// register directives
-		// $compileProvider.directive('error', error);
-		
-		// register factories
-		// $provide.factory('UserFactory', UserFactory);
 	});
 
 	// App.config --> routes in routes.js

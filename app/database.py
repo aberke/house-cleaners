@@ -48,6 +48,9 @@ db = connect()
 def drop_cleaners():
 	return db.cleaners.remove()
 
+def drop_all():
+	return drop_cleaners()
+
 # -------- FOR COMMAND-LINE TESTING USE ------------------
 
 

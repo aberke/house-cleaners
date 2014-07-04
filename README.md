@@ -28,6 +28,11 @@ $ source venv/bin/activate
 * Run server ```python run.py``` and visit<http://127.0.0.1:3000>
 
 
+Running The Tests
+---
+From the base directory ```python test.py```
+
+
 Analytics
 ---
 Google analytics: https://www.google.com/analytics/web/?et&authuser=2#report/visitors-overview/a52152670w84607722p87675852/

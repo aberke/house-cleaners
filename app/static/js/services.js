@@ -10,11 +10,8 @@
 
 ****************************************************/
 
-var AuthService = function() {};
 
 var FormService = function() {
-
-
 
 }
 
@@ -39,7 +36,6 @@ var APIservice = function($rootScope, $http, $q){
       deferred.resolve(returnedData);
     })
     .error(function(errData, status) {
-      //var e = new APIserviceError(errData, status);
       console.log('API Error', status, errData.message);
       deferred.reject(errData.message || "Error");
     });
@@ -56,18 +52,6 @@ var APIservice = function($rootScope, $http, $q){
     };
     return HTTP(method, endpoint, fd, null, options).then(successCallback, errorCallback);
   }
-  /* when there is an $http error, service rejects promise with a custom Error */
-  // function APIserviceError(err, status) {
-  //   console.log('API Error', status, err);
-  //   var error = (err || {});
-  //   this.type = "APIserviceError";
-  //   this.data = err;
-  //   this.message = (err.message || status + " Error");
-  //   this.status = status;
-  //   $rootScope.$broadcast('error', this);
-  // }
-  // APIserviceError.prototype = Error.prototype;
-
 
   /* ---------- below functions return promises --------------------------- 
                                               (route resolve needs promises) 
@@ -95,16 +79,16 @@ var APIservice = function($rootScope, $http, $q){
 
 };
 
-var UserService = function($rootScope, $http, $q, APIservice) {
+var AuthService = function($rootScope, $http, $q, APIservice) {
 
   this.logout = function() {
-    $http.get("/cleaner/logout");
+    $http.get("/cleaner/auth/logout");
   }
   this.login = function(data) {
-    return APIservice.POST('/cleaner/login', data);
+    return APIservice.POST('/cleaner/auth/login', data);
   }
   this.GETuser = function() {
-    return APIservice.GET('/cleaner/user');
+    return APIservice.GET('/cleaner/auth');
   }
 
 }

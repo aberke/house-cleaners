@@ -14,16 +14,7 @@ AngularJS controllers
 
 *********************************************************************/
 
-// TODO: have JSON files for each set and load in
-var extras = ['Ironing', 'Dishes (by hand)', 
-	'Laundry', 'Organizing', 'Bringing own cleaning products',
-];
-
-console.log('extras', extras);
-
-
-
-function MainCntl($scope, $window, $location, APIservice, UserService) {
+function MainCntl($scope, $window, $location, APIservice, AuthService) {
 	/* This controller's scope spans over all views */
 	$scope.domain = $window.location.origin;
 	$scope.user = null;
@@ -40,35 +31,27 @@ function MainCntl($scope, $window, $location, APIservice, UserService) {
 		}
 	}
 	$scope.logout = function(){
-		console.log('logout')
-		UserService.logout();
+		AuthService.logout();
 		$scope.user = null;
 	}
 	var resetUser = function() {
 		$scope.user = null;
-		UserService.GETuser().then(function(user) {
+		AuthService.GETuser().then(function(user) {
 			if (user && user != "null") {
 				$scope.user = user;
+				console.log('user', user)
 			}
 		});
 	}
 	var init = function() {
 		setupGoogleAnalytics();
 		$scope.$on('$routeChangeSuccess', function(event) {
-			resetUser()
+			resetUser();
 		});
 	}
 	init();
 }
 
-// TODO: move
-var busy = function(t) {
-	if (t.className == 'busy') {
-		t.className = "";
-	} else {
-		t.className = "busy";
-	}
-}
 
 function NewCntl($scope, APIservice) {
 
@@ -113,8 +96,7 @@ function NewCntl($scope, APIservice) {
 			$scope.error.message = message;
 			$scope.error.phonenumber = true;
 		}
-		APIservice.GET('/cleaner/validate-new-phonenumber/' + phonenumber, null)
-				.then(successCallback, errorCallback);
+		APIservice.GET('/cleaner/validate-new-phonenumber/' + phonenumber).then(successCallback, errorCallback);
 	}
 
 	$scope.submitPassword = function() {
@@ -149,7 +131,6 @@ function NewCntl($scope, APIservice) {
 		$scope.cleaner.pic_url = '';
 
 		var successCallback = function(data) {
-			console.log('uploadedpic', data)
 			$scope.cleaner.pic_url = data;
 		}
 		var errorCallback = function(message) { console.log('TODO: HANDLE ERROR'); };	
@@ -162,8 +143,7 @@ function NewCntl($scope, APIservice) {
 			$scope.next();
 		}
 		var errorCallback = function(message) { console.log('TODO: HANDLE ERROR'); };
-		APIservice.PUT('/cleaner/profile/' + $scope.cleaner._id, $scope.cleaner)
-				.then(successCallback, errorCallback);
+		APIservice.PUT('/cleaner/' + $scope.cleaner._id + '/profile', $scope.cleaner).then(successCallback, errorCallback);
 	}
 
 	function init() {
@@ -172,7 +152,7 @@ function NewCntl($scope, APIservice) {
 	init();
 }
 
-function LoginCntl($scope, $rootScope, $location, APIservice, UserService) {
+function LoginCntl($scope, $rootScope, $location, APIservice, AuthService) {
 
 	$scope.cleaner = {};
 	$scope.error = {};
@@ -186,9 +166,8 @@ function LoginCntl($scope, $rootScope, $location, APIservice, UserService) {
 			$rootScope.user = data;
 			$location.path('/profile/' + $scope.cleaner.phonenumber); 
 		}
-		UserService.login($scope.cleaner).then(successCallback, errorCallback);
+		AuthService.login($scope.cleaner).then(successCallback, errorCallback);
 	}
-	console.log('LoginCntl')
 }
 
 function ResetPasswordCntl($scope, $timeout, $location, APIservice) {
@@ -210,10 +189,9 @@ function ResetPasswordCntl($scope, $timeout, $location, APIservice) {
 			$scope.error.message = message;
 		}
 		var successCallback = function(data) {
-			console.log('sendResetCode onSuccess')
 			$scope.stage = 1;
 		}
-		APIservice.POST("/cleaner/send-reset-code", $scope.cleaner).then(successCallback, errorCallback);
+		APIservice.POST("/cleaner/auth/send-reset-code", $scope.cleaner).then(successCallback, errorCallback);
 	}
 	$scope.submitNewPassword = function() {
 		// clear old error
@@ -239,25 +217,13 @@ function ResetPasswordCntl($scope, $timeout, $location, APIservice) {
 			console.log('successCallback', data)
 			$location.path('/profile/' + $scope.cleaner.phonenumber);
 		}
-		APIservice.PUT("/cleaner/reset-password", $scope.cleaner).then(successCallback, errorCallback);
+		APIservice.PUT("/cleaner/auth/reset-password", $scope.cleaner).then(successCallback, errorCallback);
 	}
 
 	console.log('ResetPasswordCntl')
 }
 
 
-// TODO: move
-var activate = function(elt) {
-	// can't activate a busy cell
-	if (elt.className == "busy") {
-		return;
-	}
-	if (elt.className == "active") {
-		elt.className = "";
-	} else {
-		elt.className = "active";
-	}
-}
 function ProfileCntl($scope, APIservice, cleaner) {
 
 	$scope.error = {};
@@ -288,7 +254,7 @@ function ProfileCntl($scope, APIservice, cleaner) {
 		var successCallback = function(data) {
 			console.log('successCallback', data)
 		}
-		APIservice.POST('/cleaner/booking', data).then(successCallback, errorCallback);
+		APIservice.POST('/cleaner/' + $scope.cleaner._id + '/booking', data).then(successCallback, errorCallback);
 	}
 
 	$scope.enableEdit = function() {
@@ -304,17 +270,34 @@ function ProfileCntl($scope, APIservice, cleaner) {
 			console.log('successCallback')
 			$scope.editEnabled = false;
 		}
-		APIservice.PUT('/cleaner/profile/' + $scope.cleaner._id, $scope.cleaner).then(successCallback, errorCallback);
+		APIservice.PUT('/cleaner/' + $scope.cleaner._id + '/profile', $scope.cleaner).then(successCallback, errorCallback);
 	}
-
-
-
 
 }
 
 
 
 
+
+// TODO: move to directive -- this is for the schedule interaction
+var busy = function(t) {
+	if (t.className == 'busy') {
+		t.className = "";
+	} else {
+		t.className = "busy";
+	}
+}
+var activate = function(elt) {
+	// can't activate a busy cell
+	if (elt.className == "busy") {
+		return;
+	}
+	if (elt.className == "active") {
+		elt.className = "";
+	} else {
+		elt.className = "active";
+	}
+}
 
 
 
